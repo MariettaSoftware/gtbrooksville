@@ -111,10 +111,13 @@ img { max-width: 100%; height: auto; display: block; }
 
 .hero { background: #fff; border-bottom: 1px solid var(--line); }
 
+/* No height cap and no hardcoded ratio: the height follows the image's own
+   proportions via the global `img { height: auto }`. Nothing is ever cropped,
+   and re-cropping the source file just works without touching this rule. */
 .hero img {
   width: 100%;
-  max-height: 22rem;
-  object-fit: cover;
+  max-width: 1600px;      /* never upscale past the native size */
+  margin: 0 auto;
 }
 
 .hero-text { text-align: center; padding: 2rem 0 2.25rem; }
