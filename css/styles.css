@@ -64,7 +64,22 @@ img { max-width: 100%; height: auto; display: block; }
 
 .site-header a { color: #fff; text-decoration: none; }
 
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+}
+
+@media (min-width: 52rem) {
+  .header-inner { flex-direction: row; justify-content: space-between; }
+}
+
 .brand { display: block; text-align: center; }
+
+@media (min-width: 52rem) {
+  .brand { text-align: left; }
+}
 .brand-name {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.25rem, 4.5vw, 1.75rem);
@@ -82,7 +97,7 @@ img { max-width: 100%; height: auto; display: block; }
 
 .site-nav ul {
   list-style: none;
-  margin: 1rem 0 0;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
@@ -142,7 +157,11 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- Sections ---------- */
 
-.section { padding: 2.5rem 0; }
+.section { padding: 3rem 0; }
+
+@media (min-width: 52rem) {
+  .section { padding: 5rem 0; }
+}
 .section + .section { border-top: 1px solid var(--line); }
 .section-alt { background: #fff; }
 
@@ -359,3 +378,36 @@ address { font-style: normal; }
   padding: .5rem .75rem;
   border-radius: var(--radius);
 }
+
+
+/* ---------- Alternating image + text sections ---------- */
+
+.feature-inner {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+@media (min-width: 52rem) {
+  .feature-inner { grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+  /* Image right, text left. On narrow screens the image always
+     stacks on top, whichever side it takes on desktop. */
+  .feature-media-right .feature-media { order: 2; }
+}
+
+.feature-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+/* The crosses drawing sits high in the frame; bias the crop upward. */
+.feature-media img.focus-top { object-position: center 28%; }
+
+.feature-body > :first-child { margin-top: 0; }
+.feature-body .times { margin-bottom: 1.25rem; }
+.feature-body .verse + .verse { margin-top: 1rem; }
+.feature-body .btn-row { margin-top: 1.5rem; }
