@@ -62,6 +62,22 @@ img { max-width: 100%; height: auto; display: block; }
   padding: 1rem 0;
 }
 
+/* Home page: the bar sits on top of the hero photo instead of above it. */
+.site-header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: transparent;
+}
+
+/* Over a photo the muted tagline colour loses all contrast, and the brand
+   needs a shadow to stay readable wherever the image happens to be light. */
+.site-header-overlay .brand-name,
+.site-header-overlay .brand-tag { text-shadow: 0 1px 10px rgba(0,0,0,.45); }
+.site-header-overlay .brand-tag { color: rgba(255,255,255,.88); }
+
 .site-header a { color: #fff; text-decoration: none; }
 
 .header-inner {
@@ -124,15 +140,50 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- Hero ---------- */
 
-.hero { background: #fff; border-bottom: 1px solid var(--line); }
+.hero { position: relative; background: #fff; }
 
-/* No height cap and no hardcoded ratio: the height follows the image's own
-   proportions via the global `img { height: auto }`. Nothing is ever cropped,
-   and re-cropping the source file just works without touching this rule. */
+/* Darkens the photo just enough for white text to stay legible. */
+.hero-overlay-scrim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,.50), rgba(0,0,0,.18) 45%, rgba(0,0,0,.40));
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 9rem 1rem 2.5rem;   /* top padding clears the overlaid bar */
+}
+
+@media (min-width: 52rem) {
+  .hero-overlay { padding: 7rem 1rem 3rem; }
+}
+
+.hero-overlay h1 {
+  color: #fff;
+  margin: 0;
+  max-width: 20ch;
+  text-shadow: 0 1px 14px rgba(0,0,0,.35);
+}
+
+/* No hardcoded ratio: height follows the image's own proportions via the
+   global `img { height: auto }`, so re-cropping the file needs no CSS change.
+   min-height only engages on narrow screens, where the photo would otherwise
+   be too short to hold the overlaid bar and title; object-position keeps the
+   chapel in frame for the horizontal crop that min-height causes there. */
 .hero img {
   width: 100%;
-  max-width: 1600px;      /* never upscale past the native size */
-  margin: 0 auto;
+  min-height: 24rem;
+  object-fit: cover;
+  object-position: 65% center;
 }
 
 .hero-text { text-align: center; padding: 2rem 0 2.25rem; }
