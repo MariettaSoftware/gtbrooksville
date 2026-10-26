@@ -458,6 +458,10 @@ address { font-style: normal; }
 /* The crosses drawing sits high in the frame; bias the crop upward. */
 .feature-media img.focus-top { object-position: center 28%; }
 
+/* Group photo: keep its own proportions. The 4:3 crop above would slice
+   the people standing at either edge of the frame. */
+.feature-media img.natural { aspect-ratio: auto; }
+
 .feature-body > :first-child { margin-top: 0; }
 .feature-body .times { margin-bottom: 1.25rem; }
 .feature-body .verse + .verse { margin-top: 1rem; }
