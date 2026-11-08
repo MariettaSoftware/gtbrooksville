@@ -494,3 +494,60 @@ address { font-style: normal; }
 }
 
 .video-actions { justify-content: center; }
+
+
+/* ---------- Links page ---------- */
+
+/* Shared spacing for every group of cards on the links page, so the gap
+   below a group is the same whether a heading or the footer button follows. */
+.link-grid { margin-bottom: 2.5rem; }
+
+.link-card {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-card:hover, .link-card:focus {
+  border-color: var(--brand-light);
+  color: inherit;
+}
+
+.link-card h3 { margin: 0; }
+.link-card p  { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+
+/* A fixed box so wordmarks of very different proportions still line up
+   across the row. */
+.link-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4.5rem;
+  margin-bottom: .25rem;
+}
+
+.link-logo img { max-width: 70%; max-height: 100%; width: auto; object-fit: contain; }
+
+/* Sites with no logo of their own get their initials, so a row of cards
+   keeps an even rhythm instead of one card collapsing. */
+.link-monogram {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.6rem;
+  letter-spacing: .1em;
+  color: var(--brand);
+  border: 2px solid var(--brand-light);
+  border-radius: var(--radius);
+  padding: .35rem .75rem;
+}
+
+.link-domain {
+  margin-top: auto;
+  padding-top: .35rem;
+  font-size: .85rem;
+  color: var(--brand);
+  word-break: break-word;
+}
+
+.link-card:hover .link-domain, .link-card:focus .link-domain { color: var(--brand-dark); }
